@@ -48,9 +48,9 @@ for m in range(0, numberOfPairs):
             i += 1
 
     array.append(Point(x,y))
-print("Original Array:\n")
-for n in range(0, numberOfPairs):
-    print(array[n].x, array[n].y)
+# print("Original Array:\n")
+# for n in range(0, numberOfPairs):
+#     print(array[n].x, array[n].y)
 
 ############################################################
 # This section is the merge sort algorithm
@@ -147,23 +147,67 @@ def combine (left, right, sortBy):
         return combo
 
 sorted = MergeSort(array, 'x')
-print("Sorted Array:\n")
+# print("Sorted Array:\n")
+# for n in range(0, len(sorted)):
+#     print(sorted[n].x, sorted[n].y)
+
+array = [Point(0,0),Point(1,7),Point(1,8),Point(4,0),Point(5,5)]
+sorted = MergeSort(array, 'y')
 for n in range(0, len(sorted)):
     print(sorted[n].x, sorted[n].y)
+############################################################
+# This section is the find closest pair algorithm
+############################################################
+
+minDistance = float
+def distance(pointa, pointb):
+    dis = math.sqrt((pointa.x-pointb.x)**2+(pointa.y-pointb.y)**2)
+    return dis
+
+def findMandComputeSmallestPair(array, minleft, minright):
+    return 0
 
 
+def findSmallest(array):
+    arrayOfMins = []
+    distance = int
+    minimum = 1000
+    for f in range(0, len(array)):
+        for s in range(f, len(array)):
+            if (not (f == s)):
+                distance = math.sqrt((array[f].x - array[s].x) ** 2 + (array[f].y - array[s].y) ** 2)
+                if distance == minimum:
+                    arrayOfMins.append(array[f])
+                    arrayOfMins.append(array[s])
+                if distance < minimum:
+                    arrayOfMins[:] = []
+                    arrayOfMins.append(array[f])
+                    arrayOfMins.append(array[s])
+                    minimum = distance
 
+    return arrayOfMins
+def closestPair(array):
+    left = []
+    right = []
+    minleft = []
+    minright = []
+    minimum = []
+    if (len(array) <= 3):
+        minimum = findSmallest(array)
+       # return minimum
+    else:
+        mid = int(len(array) / 2)
 
+        for n in range(0, mid):
+            left.append(array[n])
 
+        for n in range(mid, len(array)):
+            right.append(array[n])
 
+        minleft = closestPair(left)
+        minright = closestPair(right)
 
-
-
-
-
-
-
-
+        minimum = findMandComputeSmallestPair(left,right)
 
 
 
