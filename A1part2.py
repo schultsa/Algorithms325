@@ -61,7 +61,7 @@ def MergeSort(arrayOfpairs, sortBy):
     left = []
     right = []
 
-    if(len(arrayOfpairs)==1):
+    if(len(arrayOfpairs)<=1):
         return arrayOfpairs
     mid = int(len(arrayOfpairs)/2)
 
@@ -199,6 +199,10 @@ def find_M_andComputeSmallestPair(left, right, min):
                     min[:] = []
                     min.append(sortedM[i])
                     min.append(sortedM[j])
+                    print("min in thing:", i, j)
+                    for n in range(0, len(min)):
+                        print(min[n].x, min[n].y)
+                    print("-------")
                 if distance(sortedM[i], sortedM[j]) == beta:
                     min.append(sortedM[i])
                     min.append(sortedM[j])
@@ -209,8 +213,8 @@ def find_M_andComputeSmallestPair(left, right, min):
 
 def findSmallest(array):
     arrayOfMins = []
-    d = int
-    minimum = 100000
+    d = float
+    minimum = 100
     for f in range(0, len(array)):
         for s in range(f, len(array)):
             if (not (f == s)):
@@ -218,15 +222,18 @@ def findSmallest(array):
                 if d == minimum:
                     arrayOfMins.append(array[f])
                     arrayOfMins.append(array[s])
-                if d < minimum:
-                    arrayOfMins[:] = []
-                    arrayOfMins.append(array[f])
-                    arrayOfMins.append(array[s])
-                    minimum = d
+                else:
+                    if d < minimum:
+                        arrayOfMins[:] = []
+                        arrayOfMins.append(array[f])
+                        arrayOfMins.append(array[s])
+                        minimum = d
 
     return arrayOfMins
+
 def closestPair(array):
-    array = MergeSort(array, 'x')
+  #  array = MergeSort(array, 'x')
+    min = []
     left = []
     right = []
     minleft = []
@@ -242,22 +249,44 @@ def closestPair(array):
 
         for n in range(mid, len(array)):
             right.append(array[n])
-
-        minleft = closestPair(left)
         minright = closestPair(right)
+        minleft = closestPair(left)
+
         disleft = distance(minleft[0], minleft[1])
         disright = distance(minright[0], minright[1])
-        if disleft<= disright:
-            min = minleft
+
+        if len(min)>0:
+            if disleft == distance(min[0], min[1]):
+                for m in range(0, len(minleft)):
+                    min.append(minleft[m])
+            if disright == distance(min[0], min[1]):
+                for m in range(0, len(minright)):
+                    min.append(minright[m])
+            if disleft < distance(min[0], min[1]):
+                min = minleft
+            if disright <distance(min[0], min[1]):
+                min = minright
         else:
-            min = minright
+            print("minright in else statement of closest pair:")
+            for n in range(0, len(minright)):
+                print(minright[n].x, minright[n].y)
+            print("-------")
+            if disleft < disright:
+                min = minleft
+            if disright < disleft:
+                min = minright
+            if disright == disleft:
+                for n in range(0, len(minleft)):
+                    min.append(minleft[n])
+                for n in range(0, len(minright)):
+                    min.append(minright[n])
         minimum = find_M_andComputeSmallestPair(left,right, min)
 
     return minimum
 
-
+array = MergeSort(array, 'x')
 arrayOfMins = closestPair(array)
-print(distance)
+print(distance(arrayOfMins[0], arrayOfMins[1]))
 
 for n in range(0, len(arrayOfMins)):
     print(arrayOfMins[n].x, arrayOfMins[n].y)
