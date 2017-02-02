@@ -21,7 +21,7 @@ def distance(pointa, pointb):
 def printArray(array):
     for n in range(0, len(array)):
         print(array[n].x, array[n].y)
-file = open("example.input", "r+")
+file = open(sys.argv[1], "r+")
 text = file.read()
 numberOfPairs = text.count('\n')
 array = []
@@ -73,7 +73,7 @@ for f in range(0, numberOfPairs):
                 arrayOfMins[:] = []
                 arrayOfMins.append(array[f])
                 arrayOfMins.append(array[s])
-                m = distance
+                m = dis
 
 file = open("BruteForce_output.txt","w")
 t = distance(arrayOfMins[0], arrayOfMins[1])

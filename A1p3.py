@@ -19,7 +19,7 @@ class Point:
 def printArray(array):
     for n in range(0, len(array)):
         print(array[n].x, array[n].y)
-file = open("numbers.input", "r+")
+file = open(sys.argv[1], "r+")
 text = file.read()
 numberOfPairs = text.count('\n')
 #print(numberOfPairs)
